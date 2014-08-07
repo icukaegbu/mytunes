@@ -16,6 +16,16 @@ var AppModel = Backbone.Model.extend({
     params.library.on('play', function(song){
       this.set('currentSong', song);
     }, this);
+
+    //initialize the add and remove functionality of the song queue
+    this.get('songQueue').on('enqueue', function(song) {
+      //on the add event, add song to the queue
+      this.get('songQueue').add(song);
+      console.log('enqueue called from AppModel');
+      console.log(this.get('songQueue').attributes);
+    });
+
+    this.get('songQueue').on('remove', function(song) {});
   }
 
 });
