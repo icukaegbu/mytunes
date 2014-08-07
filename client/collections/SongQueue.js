@@ -7,7 +7,22 @@ var SongQueue = Songs.extend({
   	  this.add(song);
   	  console.log("from SongQueue; ");
     })
-  },
+
+    this.on('add', function(song){
+      this.push(song);
+
+    }, this);
+
+    this.on('ended', function(song){
+      this.shift();
+
+    }, this);
+
+    this.on('dequeue', function(song){
+      this.remove(song);
+
+    }, this);
+  }
 
   //method to add songs to the queue
   // this.on("add", function(song){

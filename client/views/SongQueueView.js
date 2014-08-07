@@ -4,14 +4,17 @@ var SongQueueView = Backbone.View.extend({
   tagName: "table",
   
   initialize: function() {
-  	this.render();
+  	//this.render();
+  	//var self = this;
+  
+  	this.collection.on('add', function(model){
+  		this.render();
+  		//console.log("from songqueueview: collection ="+collection);
+  	}, this);
 
-  	var self = this;
-  	this.collection.on('enqueue', function(){
-  		//re-render the view
-  		self.render();
-  		console.log("from songqueueview: collection ="+collection);
-  	});
+    this.collection.on('remove', function(model){
+      this.render();
+    }, this);
   },
 
   render: function() {
@@ -22,7 +25,7 @@ var SongQueueView = Backbone.View.extend({
       	return new SongQueueEntryView({model: song}).render();
       })
   	);
-    return this.$el;
+    return this.$el;   //to remove?
   }
 
 });
